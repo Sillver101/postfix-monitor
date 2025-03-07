@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Install dependencies
+# Install or update dependencies
 echo "Installing dependencies..."
 sudo apt update && sudo apt install -y python3 python3-pip
-pip3 install flask requests
+pip3 install --upgrade flask requests
 
 # Ask for Teams webhook URL
 echo "Enter your Microsoft Teams webhook URL: "
