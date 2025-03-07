@@ -24,16 +24,16 @@ The installation script will automatically install or update these dependencies 
 
 1. Clone the Repository
 
-   git clone https://github.com/Sillver101/postfix-monitor.git
-   cd postfix-monitor
+   `git clone https://github.com/Sillver101/postfix-monitor.git`
+   `cd postfix-monitor`
 
 2. Make the Installer Executable
 
-   chmod +x install.sh
+   `chmod +x install.sh`
 
 3. Run the Installer
 
-   sudo ./install.sh
+   `sudo ./install.sh`
 
 4. Enter your Microsoft Teams Webhook URL when prompted.
 
@@ -47,11 +47,11 @@ To check the mail queue, open a browser and go to:
 
 To check the service status:
 
-   sudo systemctl status postfix_monitor
+   `sudo systemctl status postfix_monitor`
 
 To view logs:
 
-   journalctl -u postfix_monitor -f
+   `journalctl -u postfix_monitor -f`
 
 ## Managing the Service
 
