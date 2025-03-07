@@ -24,7 +24,7 @@ The installation script will automatically install or update these dependencies 
 
 1. Clone the Repository
 
-   git clone https://github.com/yourusername/postfix-monitor.git
+   git clone https://github.com/Sillver101/postfix-monitor.git
    cd postfix-monitor
 
 2. Make the Installer Executable
