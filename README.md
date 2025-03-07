@@ -71,13 +71,13 @@ Disable autostart:
 
 To remove the service and script:
 
-   <pre> ```bash# 
+   <pre> 
    sudo systemctl stop postfix_monitor
    sudo systemctl disable postfix_monitor
    sudo rm /usr/local/bin/postfix_monitor.py
    sudo rm /etc/systemd/system/postfix_monitor.service
    sudo systemctl daemon-reload
-   ```</pre>
+   </pre>
 
 ## Notes
 
