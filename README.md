@@ -57,25 +57,27 @@ To view logs:
 
 Stop the service:
 
-   sudo systemctl stop postfix_monitor
+   `sudo systemctl stop postfix_monitor`
 
 Restart the service:
 
-   sudo systemctl restart postfix_monitor
+   `sudo systemctl restart postfix_monitor`
 
 Disable autostart:
 
-   sudo systemctl disable postfix_monitor
+   `sudo systemctl disable postfix_monitor`
 
 ## Uninstallation
 
 To remove the service and script:
 
+   <pre> ```bash# 
    sudo systemctl stop postfix_monitor
    sudo systemctl disable postfix_monitor
    sudo rm /usr/local/bin/postfix_monitor.py
    sudo rm /etc/systemd/system/postfix_monitor.service
    sudo systemctl daemon-reload
+   ```</pre>
 
 ## Notes
 
