@@ -9,6 +9,37 @@ pip3 install --upgrade flask requests
 echo "Enter your Microsoft Teams webhook URL: "
 read TEAMS_WEBHOOK_URL
 
+# Ask for Queue Threshold
+echo "Enter the Queue Threshold (default is 5): "
+read QUEUE_THRESHOLD
+QUEUE_THRESHOLD=${QUEUE_THRESHOLD:-5}
+
+# Ask for Alert Delay
+echo "Enter the Alert Delay in seconds (default is 10): "
+read ALERT_DELAY
+ALERT_DELAY=${ALERT_DELAY:-10}
+
+# Create the config file with options
+echo "Creating config file..."
+cat << EOF | sudo tee /etc/postfix_monitor_config.ini > /dev/null
+# Postfix Mail Queue Monitor Configuration File
+
+# Microsoft Teams Webhook URL
+# This URL is used to send alerts when the mail queue exceeds the threshold.
+TEAMS_WEBHOOK_URL = "$TEAMS_WEBHOOK_URL"
+
+# Queue Threshold
+# This is the number of emails in the queue that will trigger an alert if exceeded.
+# Default value: 5
+QUEUE_THRESHOLD = $QUEUE_THRESHOLD
+
+# Alert Delay
+# This is the number of seconds the queue must stay above the threshold before sending an alert.
+# Default value: 10 seconds
+ALERT_DELAY = $ALERT_DELAY
+
+EOF
+
 # Create the monitoring script
 cat << EOF | sudo tee /usr/local/bin/postfix_monitor.py > /dev/null
 import time
@@ -16,10 +47,16 @@ import subprocess
 import threading
 import requests
 from flask import Flask, jsonify
+import configparser
 
-TEAMS_WEBHOOK_URL = "$TEAMS_WEBHOOK_URL"
-QUEUE_THRESHOLD = 5
-ALERT_DELAY = 10
+# Load configuration file
+config = configparser.ConfigParser()
+config.read('/etc/postfix_monitor_config.ini')
+
+# Get values from the config file
+TEAMS_WEBHOOK_URL = config.get('DEFAULT', 'TEAMS_WEBHOOK_URL')
+QUEUE_THRESHOLD = config.getint('DEFAULT', 'QUEUE_THRESHOLD')
+ALERT_DELAY = config.getint('DEFAULT', 'ALERT_DELAY')
 CHECK_INTERVAL = 5
 
 app = Flask(__name__)
